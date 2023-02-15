@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import TodoList from "./TodoList";
 
 let nextId = 0;
@@ -6,12 +6,20 @@ let nextId = 0;
 function App() {
   const [list, setList] = useState([]);
   const [input, setInput] = useState('');
+  const inputRef = useRef(null);
 
  /* list = {
     id: ,
     item: '',
     complete: false
   } */
+
+  //focus on input after page reload
+  useEffect(() => {
+    if (!input) {
+      inputRef.current.focus();
+    }
+  }, [input])
 
 
   //add new Todo to the list
@@ -25,7 +33,7 @@ function App() {
     }
     setList([...list, newTodo]);
 
-    //cleart inpupt field after submit
+    //clear inpupt field after submit
     setInput('');
   }
 
@@ -44,11 +52,6 @@ function App() {
     setList(newList);
   }
 
-  /* const deleteTodo = (id) => {
-    const newList = list.filter(todo => id !== todo.id);
-    setList(newList);
-  } */
-
   return (
     <div>
       <h1>Todo List</h1>
@@ -57,10 +60,13 @@ function App() {
         placeholder="Add todo"
         value={input}
         onChange={e => setInput(e.target.value)}
+        ref={inputRef}
       />
       <button onClick={() => addTodo(input)}>Add</button>
       <TodoList todos={list} onEdit={handleEdit} onDelete={handleDeleteTodo} />
-      {/* <ul>
+
+      {/* create separate TodoList & Todo components
+      <ul>
         {list.map(todo => {
           return (
           <li key={todo.id}>

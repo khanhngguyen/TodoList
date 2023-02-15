@@ -1,7 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 function Todo({todo, onEdit, onDelete}) {
     const [isEdit, setEdit] = useState(false);
+    const editButtonRef = useRef(null);
+
+    //autofocus on input when click on Edit buttton
+    useEffect(() => {
+        if (isEdit) {
+            editButtonRef.current.focus()
+        }
+    }, [isEdit])
+
     let todoContent;
     if (isEdit) {
         todoContent = (
@@ -9,6 +18,7 @@ function Todo({todo, onEdit, onDelete}) {
             <input
             value={todo.item}
             onChange={e => onEdit({...todo, item: e.target.value})}
+            ref={editButtonRef}
             />
             <button onClick={() => setEdit(false)}>Save</button>
             </>
