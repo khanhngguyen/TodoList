@@ -21,7 +21,6 @@ function App() {
     }
   }, [input])
 
-
   //add new Todo to the list
   const addTodo = (todo) => {
     //prevent empty input
@@ -62,7 +61,7 @@ function App() {
         onChange={e => setInput(e.target.value)}
         ref={inputRef}
       />
-      <button onClick={() => addTodo(input)}>Add</button>
+      <button onClick={() => addTodo(input)}o>Add</button>
       <TodoList todos={list} onEdit={handleEdit} onDelete={handleDeleteTodo} />
 
       {/* create separate TodoList & Todo components
