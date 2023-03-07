@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import TodoList from "./TodoList";
+import Popup from './Popup'
 
 let nextId = 0;
 
 function App() {
   const [list, setList] = useState([]);
   const [input, setInput] = useState('');
+  const [popup, setPopup] = useState({show: false, id: null});
   const inputRef = useRef(null);
 
  /* list = [
@@ -54,10 +56,37 @@ function App() {
     }))
   }
 
+//show confirmation popup box
   const handleDeleteTodo = (id) => {
+    setPopup({
+      show: true,
+      id: id,
+    })
+  }
+
+  const handleDeleteTrue = () => {
+    if (popup.show && popup.id) {
+      const newList = list.filter(todo => todo.id !== popup.id);
+      setList(newList);
+    }
+    //close & reset popup
+    setPopup({
+      show: false,
+      id: null,
+    })
+  }
+
+  const handleDeleteFalse = () => {
+    setPopup({
+      show: false,
+      id: null,
+    })
+  }
+
+ /*  const handleDeleteTodo = (id) => {
     const newList = list.filter(todo => todo.id !== id);
     setList(newList);
-  }
+  } */
 
   return (
     <div>
@@ -72,6 +101,12 @@ function App() {
       />
       <button onClick={() => addTodo(input)}>Add</button>
       <TodoList todos={list} onEdit={handleEdit} onDelete={handleDeleteTodo} />
+      {popup.show && (
+        <Popup
+        handleDeleteTrue={handleDeleteTrue}
+        handleDeleteFalse={handleDeleteFalse}
+        />
+      )}
 
       {/* create separate TodoList & Todo components
       <ul>
