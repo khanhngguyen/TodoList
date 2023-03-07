@@ -3,9 +3,12 @@ import TodoList from "./TodoList";
 import Popup from './Popup'
 
 let nextId = 0;
+const LOCAL_STORAGE_KEY = 'TodoApp-list';
 
 function App() {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState((() => {
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || []
+  }));
   const [input, setInput] = useState('');
   const [popup, setPopup] = useState({show: false, id: null});
   const inputRef = useRef(null);
@@ -24,6 +27,18 @@ function App() {
       inputRef.current.focus();
     }
   }, [input])
+
+  //save todo list into localStorage, so it won't dissappear after page reloads
+  //doesn't work -> read from localStorage directly when setting the initial todoList state value
+ /*  useEffect(() => {
+    const storedList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+    if (storedList) setList(storedList)
+  }, []) */
+
+//save todolistt into localStorage
+  useEffect(() => {
+    if (list.length > 0) {localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list))}
+  }, [list])
 
   //add new Todo to the list
   const addTodo = (todo) => {
