@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import TodoList from "./TodoList";
 import Popup from './Popup'
 
-let nextId = 0;
+let nextId = Math.floor((Math.random() * 10000) + 1);
 const LOCAL_STORAGE_KEY = 'TodoApp-list';
 
 function App() {
