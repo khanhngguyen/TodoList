@@ -8,11 +8,13 @@ function App() {
   const [input, setInput] = useState('');
   const inputRef = useRef(null);
 
- /* list = {
+ /* list = [
+  {
     id: ,
     item: '',
     complete: false
-  } */
+  }
+ ] */
 
   //focus on input after page reload
   useEffect(() => {
@@ -34,6 +36,12 @@ function App() {
 
     //clear inpupt field after submit
     setInput('');
+  }
+
+  const handleKeydown = (e) => {
+    if (e.key === 'Enter') {
+      return addTodo(input)
+    }
   }
 
   const handleEdit = (nextTodo) => {
@@ -59,9 +67,10 @@ function App() {
         placeholder="Add todo"
         value={input}
         onChange={e => setInput(e.target.value)}
+        onKeyDown={e => handleKeydown(e)}
         ref={inputRef}
       />
-      <button onClick={() => addTodo(input)}o>Add</button>
+      <button onClick={() => addTodo(input)}>Add</button>
       <TodoList todos={list} onEdit={handleEdit} onDelete={handleDeleteTodo} />
 
       {/* create separate TodoList & Todo components

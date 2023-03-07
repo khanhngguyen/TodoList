@@ -11,6 +11,12 @@ function Todo({todo, onEdit, onDelete}) {
         }
     }, [isEdit])
 
+    const handleKeydown = (e) => {
+        if (e.key === 'Enter') {
+            return setEdit(false)
+        }
+    }
+
     let todoContent;
     if (isEdit) {
         todoContent = (
@@ -18,6 +24,7 @@ function Todo({todo, onEdit, onDelete}) {
             <input
             value={todo.item}
             onChange={e => onEdit({...todo, item: e.target.value})}
+            onKeyDown={e => handleKeydown(e)}
             ref={editButtonRef}
             />
             <button onClick={() => setEdit(false)}>Save</button>
