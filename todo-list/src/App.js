@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import TodoList from "./TodoList";
 import Popup from './Popup'
+//adding Material UI
+import { Typography, Container, TextField, Button, Dialog, DialogContent, DialogTitle } from '@mui/material/';
+
 
 let nextId = Math.floor((Math.random() * 10000) + 1);
 const LOCAL_STORAGE_KEY = 'TodoApp-list';
@@ -104,24 +107,40 @@ function App() {
   } */
 
   return (
-    <div>
-      <h1>Todo List</h1>
-      <input
-        type='text'
-        placeholder="Add todo"
-        value={input}
-        onChange={e => setInput(e.target.value)}
-        onKeyDown={e => handleKeydown(e)}
-        ref={inputRef}
+    <Container maxWidth="sm">
+      <Typography variant="h4">Todo List</Typography>
+      <TextField
+      variant="outlined"
+      type='text'
+      placeholder="Add todo"
+      value={input}
+      onChange={e => setInput(e.target.value)}
+      onKeyDown={e => handleKeydown(e)}
+      ref={inputRef}
       />
-      <button onClick={() => addTodo(input)}>Add</button>
+      <Button
+      variant="contained"
+      onClick={() => addTodo(input)}>Add</Button>
       <TodoList todos={list} onEdit={handleEdit} onDelete={handleDeleteTodo} />
-      {popup.show && (
+      <Dialog
+      open={popup.show}
+      onClose={handleDeleteFalse}
+      >
+        <DialogTitle>Are you sure?</DialogTitle>
+        <DialogContent>
+          <Popup
+        handleDeleteTrue={handleDeleteTrue}
+        handleDeleteFalse={handleDeleteFalse}
+        />
+        </DialogContent>
+      </Dialog>
+      
+      {/* {popup.show && (
         <Popup
         handleDeleteTrue={handleDeleteTrue}
         handleDeleteFalse={handleDeleteFalse}
         />
-      )}
+      )} */}
 
       {/* create separate TodoList & Todo components
       <ul>
@@ -134,7 +153,7 @@ function App() {
           )
         })}
       </ul> */}
-    </div>
+    </Container>
   );
 }
 

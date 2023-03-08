@@ -1,13 +1,15 @@
 import React from 'react'
+import { Button } from '@mui/material/';
+
 
 function Popup({handleDeleteTrue, handleDeleteFalse}) {
   return (
     <div>
-        <div>
-            <p>Are you sure you want to delete?</p>
-            <button onClick={() => handleDeleteTrue()}>Confirm</button>
-            <button onClick={() => handleDeleteFalse()}>Cancel</button>
-        </div>
+      <p>Click Confirm to delete. Click cancel to cancel</p>
+      <Button
+      variant='contained'
+      onClick={() => handleDeleteTrue()}>Confirm</Button>
+      <Button onClick={() => handleDeleteFalse()}>Cancel</Button>
     </div>
   )
 }

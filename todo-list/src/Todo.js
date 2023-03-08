@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
+import { TextField, Button, Checkbox } from '@mui/material/';
+
 
 function Todo({todo, onEdit, onDelete}) {
     const [isEdit, setEdit] = useState(false);
-    const editButtonRef = useRef(null);
 
     //autofocus on input when click on Edit buttton
-    useEffect(() => {
+    //use autoFocus instead
+  /*   useEffect(() => {
         if (isEdit) {
-            editButtonRef.current.focus()
+            editButtonRef.current.focus();
         }
-    }, [isEdit])
+    }, [isEdit]) */
 
     const handleKeydown = (e) => {
         if (e.key === 'Enter') {
@@ -21,20 +23,27 @@ function Todo({todo, onEdit, onDelete}) {
     if (isEdit) {
         todoContent = (
             <>
-            <input
+            <TextField
+            variant='outlined'
             value={todo.item}
             onChange={e => onEdit({...todo, item: e.target.value})}
             onKeyDown={e => handleKeydown(e)}
-            ref={editButtonRef}
+            autoFocus
             />
-            <button onClick={() => setEdit(false)}>Save</button>
+            <Button
+            variant='outlined'
+            size='small'
+            onClick={() => setEdit(false)}>Save</Button>
             </>
         )
     } else {
         todoContent = (
             <>
             {todo.item}
-            <button onClick={() => setEdit(true)}>Edit</button>
+            <Button
+            variant='outlined'
+            size='small'
+            onClick={() => setEdit(true)}>Edit</Button>
             </>
         )
     }
@@ -42,9 +51,12 @@ function Todo({todo, onEdit, onDelete}) {
     return (
         <>
         <li>
-            <input type="checkbox" complete={todo.complete} />
+            <Checkbox complete={todo.complete} />
             {todoContent}
-            <button onClick={() => onDelete(todo.id)}>Delete</button>
+            <Button
+            variant='outlined'
+            size='small'
+            onClick={() => onDelete(todo.id)}>Delete</Button>
         </li>
         </>
     )
