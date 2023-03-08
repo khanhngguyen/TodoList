@@ -25,6 +25,7 @@ function Todo({todo, onEdit, onDelete}) {
             <>
             <TextField
             variant='outlined'
+            size='small'
             value={todo.item}
             onChange={e => onEdit({...todo, item: e.target.value})}
             onKeyDown={e => handleKeydown(e)}

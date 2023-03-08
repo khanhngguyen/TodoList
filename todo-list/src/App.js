@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import TodoList from "./TodoList";
 import Popup from './Popup'
 //adding Material UI
-import { Typography, Container, TextField, Button, Dialog, DialogContent, DialogTitle } from '@mui/material/';
+import {
+  Typography, Container, TextField, Button,
+  Dialog, DialogContent, DialogTitle
+} from '@mui/material/';
 
 
 let nextId = Math.floor((Math.random() * 10000) + 1);
@@ -107,10 +110,11 @@ function App() {
   } */
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth={"sm"}>
       <Typography variant="h4">Todo List</Typography>
       <TextField
       variant="outlined"
+      size="small"
       type='text'
       placeholder="Add todo"
       value={input}
@@ -134,7 +138,7 @@ function App() {
         />
         </DialogContent>
       </Dialog>
-      
+
       {/* {popup.show && (
         <Popup
         handleDeleteTrue={handleDeleteTrue}
