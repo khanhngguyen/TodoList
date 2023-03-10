@@ -6,7 +6,7 @@ import {
   Typography, Container, TextField, Button,
   Dialog, DialogContent, DialogTitle
 } from '@mui/material/';
-
+import './App.css'
 
 let nextId = Math.floor((Math.random() * 10000) + 1);
 const LOCAL_STORAGE_KEY = 'TodoApp-list';
@@ -110,8 +110,25 @@ function App() {
   } */
 
   return (
-    <Container maxWidth={"sm"}>
-      <Typography variant="h4">Todo List</Typography>
+    <Container maxWidth={"sm"} className="container">
+      <Typography variant="h4" className="title">Todo List</Typography>
+      <div className="input-container">
+        <TextField
+        variant="outlined"
+        size="small"
+        className="input"
+        type='text'
+        placeholder="Add todo"
+        value={input}
+        onChange={e => setInput(e.target.value)}
+        onKeyDown={e => handleKeydown(e)}
+        ref={inputRef}
+        />
+        <Button
+        variant="contained"
+        onClick={() => addTodo(input)}>Add</Button>
+      </div>
+      {/* <Typography variant="h4" className="title">Todo List</Typography>
       <TextField
       variant="outlined"
       size="small"
@@ -124,7 +141,7 @@ function App() {
       />
       <Button
       variant="contained"
-      onClick={() => addTodo(input)}>Add</Button>
+      onClick={() => addTodo(input)}>Add</Button> */}
       <TodoList todos={list} onEdit={handleEdit} onDelete={handleDeleteTodo} />
       <Dialog
       open={popup.show}

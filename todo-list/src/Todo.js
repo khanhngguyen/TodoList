@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { TextField, Button, Checkbox } from '@mui/material/';
+import './App.css'
 
 
 function Todo({todo, onEdit, onDelete}) {
@@ -34,6 +35,7 @@ function Todo({todo, onEdit, onDelete}) {
             <Button
             variant='outlined'
             size='small'
+            sx={{ 'margin-left': '8px' }}
             onClick={() => setEdit(false)}>Save</Button>
             </>
         )
@@ -44,6 +46,7 @@ function Todo({todo, onEdit, onDelete}) {
             <Button
             variant='outlined'
             size='small'
+            sx={{ 'margin-left': '8px' }}
             onClick={() => setEdit(true)}>Edit</Button>
             </>
         )
@@ -51,12 +54,13 @@ function Todo({todo, onEdit, onDelete}) {
 
     return (
         <>
-        <li>
+        <li className='todo'>
             <Checkbox complete={todo.complete} />
-            {todoContent}
+            <span className='toto-content'>{todoContent}</span>
             <Button
             variant='outlined'
             size='small'
+            sx={{ 'margin-left': '8px' }}
             onClick={() => onDelete(todo.id)}>Delete</Button>
         </li>
         </>
