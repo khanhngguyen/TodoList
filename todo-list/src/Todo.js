@@ -32,22 +32,22 @@ function Todo({todo, onEdit, onDelete}) {
             onKeyDown={e => handleKeydown(e)}
             autoFocus
             />
-            <Button
+            {/* <Button
             variant='outlined'
             size='small'
             sx={{ 'margin-left': '8px' }}
-            onClick={() => setEdit(false)}>Save</Button>
+            onClick={() => setEdit(false)}>Save</Button> */}
             </>
         )
     } else {
         todoContent = (
             <>
             {todo.item}
-            <Button
+            {/* <Button
             variant='outlined'
             size='small'
             sx={{ 'margin-left': '8px' }}
-            onClick={() => setEdit(true)}>Edit</Button>
+            onClick={() => setEdit(true)}>Edit</Button> */}
             </>
         )
     }
@@ -56,7 +56,20 @@ function Todo({todo, onEdit, onDelete}) {
         <>
         <li className='todo'>
             <Checkbox complete={todo.complete} />
-            <span className='toto-content'>{todoContent}</span>
+            {todoContent}
+            {isEdit && (
+                <Button
+                variant='outlined'
+                size='small'
+                sx={{ 'margin-left': '8px' }}
+                onClick={() => setEdit(false)}>Save</Button>
+            )}
+            <Button
+            variant='outlined'
+            size='small'
+            sx={{ 'margin-left': '8px' }}
+            onClick={() => setEdit(true)}>Edit</Button>
+
             <Button
             variant='outlined'
             size='small'
