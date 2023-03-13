@@ -7,10 +7,10 @@ Create a simple todo list, using React & MUI
 ![Demo gif](./todo-list/src/demo.gif)
 
 ### Development phases
-##### Phase 1: the basics:
+#### Phase 1: the basics:
 - create basic Todo list within 1 main component (App.js)
 - then split into smaller components (TodoList.js, Todo.js), add codes to make all components functional
-##### Phase 2: add more features & fix issues:
+#### Phase 2: add more features & fix issues:
 - add features:
     - autofocus on Add todo input & when click on Edit button
     - make pressing down Enter key works when finish typing Add todo or finish Editing
@@ -47,13 +47,13 @@ etc.
     - `<Diaglog>` components for confirmation pop-up box
 - Git: create & merge branch
 
-## Known limitations
+### Known limitations
 - Warning & errors in console
 - stored data in localStorage does not work on 'private browsing' or 'incognito mode'
 - even when delete all items, when reload page, the last deleted item will also reload
 - Edit button should disappear after being clicked
 
-## Goals for next project
+### Goals for next project
 - Learn more about React
 - Understand warning & errors in console & how to fix them
 - Fix layout issues & add more contents & features, e.g:
