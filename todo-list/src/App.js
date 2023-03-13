@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import TodoList from "./TodoList";
 import Popup from './Popup'
 //adding Material UI
@@ -17,7 +17,6 @@ function App() {
   }));
   const [input, setInput] = useState('');
   const [popup, setPopup] = useState({show: false, id: null});
-  const inputRef = useRef(null);
 
  /* list = [
   {
@@ -27,12 +26,12 @@ function App() {
   }
  ] */
 
-  //focus on input after page reload
-  useEffect(() => {
+  //focus on input after page reload --> use autoFocus instead
+  /* useEffect(() => {
     if (!input) {
       inputRef.current.focus();
     }
-  }, [input])
+  }, [input]) */
 
   //save todo list into localStorage, so it won't dissappear after page reloads
   //doesn't work -> read from localStorage directly when setting the initial todoList state value
@@ -119,29 +118,15 @@ function App() {
         className="input"
         type='text'
         placeholder="Add todo"
+        autoFocus
         value={input}
         onChange={e => setInput(e.target.value)}
         onKeyDown={e => handleKeydown(e)}
-        ref={inputRef}
         />
         <Button
         variant="contained"
         onClick={() => addTodo(input)}>Add</Button>
       </div>
-      {/* <Typography variant="h4" className="title">Todo List</Typography>
-      <TextField
-      variant="outlined"
-      size="small"
-      type='text'
-      placeholder="Add todo"
-      value={input}
-      onChange={e => setInput(e.target.value)}
-      onKeyDown={e => handleKeydown(e)}
-      ref={inputRef}
-      />
-      <Button
-      variant="contained"
-      onClick={() => addTodo(input)}>Add</Button> */}
       <TodoList todos={list} onEdit={handleEdit} onDelete={handleDeleteTodo} />
       <Dialog
       open={popup.show}
